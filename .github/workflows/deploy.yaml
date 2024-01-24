@@ -12,8 +12,6 @@ jobs:
       - uses: actions/checkout@v3
       - run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - run: docker build -t abhijeet470/react-app -f Dockerfile.dev .
-      - run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_USERNAME}}
-      - run: docker build -t abhijeet470/react-app -Dockerfile.dev .
       - run: docker run -e CI=true abhijeet470/react-app npm test
 
       - name: Generate deployment package
@@ -23,7 +21,7 @@ jobs:
 
                
 
-        uses: einregilsson/beanstalk-deploy@v21
+        uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{secrets.AWS_ACCESS_KEY}}
           aws_secret_key: ${{secrets.AWS_SECRET_KEY}}
